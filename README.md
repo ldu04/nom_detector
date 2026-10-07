@@ -39,16 +39,21 @@
 
 ## 시스템 구조
 
+이 저장소에 커밋된 트리는 **디렉터리 없는 평면 구조**다. 파일은 역할별로 나뉘어 있다.
+
 ```
-nom_detector/
-├── core/         # 핵심 로직 (캘리브레이션, 경고 판단)
-├── vision/       # 웹캠 영상 처리 및 자세 감지
-├── stats/        # 자세 통계 수집 및 분석
-├── ui/           # 메인 화면, 경고 UI
-└── animations/   # 단계별 경고 애니메이션
+진입·화면    main.py · main_window.py · home.py · manual.py · camera_select.py
+감지·판단    pose_model.py (MediaPipe) · posture.py · tracker.py · filters.py
+             monitoring.py · worker.py · pose_landmarker_lite.task
+통계         statistics.py · matplotlib_font.py
+UI 요소      status_badge.py · transparent_label.py · video_stack.py
+             background_screen.py · styles.py · cat_punch.py
+설정·실행    config.py · requirements.txt · 거북놈.bat
 ```
 
-중간 발표 이후 단일/혼합 구조에서 기능별 모듈로 전면 분리하여 유지보수성을 높였다.
+> 🔧 **정리 예정** — 루트에 `.pyc` 바이트코드 캐시와 `__init__ (n).py` 형태의 중복
+> 파일이 함께 커밋돼 있다. `.gitignore` 추가와 함께 걷어낼 대상이다. 또한 일부
+> `.pyc` 는 대응하는 `.py` 소스 없이 올라가 있다.
 
 ---
 
